@@ -10,12 +10,13 @@ import {
 } from "@components/ui/card";
 import { Badge } from "@components/ui/badge";
 import { ContainerSection } from "@components/ContainerSection";
+import type { JSX } from "react";
 
 export const Route = createFileRoute("/(app)/showcase/ui")({
   component: UIShowcase,
 });
 
-function UIShowcase() {
+function UIShowcase(): JSX.Element {
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">UI Components Showcase</h1>

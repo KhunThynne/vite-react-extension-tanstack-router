@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 import tanstackLogo from "/tanstack.png";
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Index() {
+function Index(): JSX.Element {
   const [count, setCount] = useState(0);
   const { t } = useTranslation();
   return (

@@ -1,7 +1,7 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import { Button } from "@components/ui/button";
-import React, { Fragment } from "react";
+import React, { Fragment, type JSX } from "react";
 import { Layout } from "@/shared/components/Layout";
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -10,7 +10,7 @@ const TanStackRouterDevtools = import.meta.env.PROD
         default: res.TanStackRouterDevtools,
       })),
     );
-const NotFound = () => {
+const NotFound: () => JSX.Element = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-neutral-100 dark:bg-neutral-900 p-4">
       <Card className="w-full max-w-md shadow-lg">
