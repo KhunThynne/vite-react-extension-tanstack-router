@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/KhunThynne/vite-react-shadcn/compare/tan-v0.1.0...tan-v0.1.1) (2026-02-14)
+
+
+### Features
+
+* implement tanstack router with initial and ui showcase routes, and disable ([54b6915](https://github.com/KhunThynne/vite-react-shadcn/commit/54b69151fb7c22cd3c1b1897bbb63946cdf69e3e))
+
 ## 0.1.0 (2026-02-14)
 
 
