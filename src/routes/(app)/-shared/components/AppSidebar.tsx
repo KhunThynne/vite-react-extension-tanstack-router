@@ -1,20 +1,19 @@
-"use client";
 import { useTranslation } from "react-i18next";
 import { Home, LayoutDashboard, FileText, Component } from "lucide-react";
 
 import { cn } from "@components/ui/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import clsx from "clsx";
-import { useSidebarContext } from "../contexts/ProviderSidebar";
-import { SwitchThemeButton } from "./SwitchThemeButton";
-import { SwitchLanguageButton } from "./SwitchLanguageButton";
+import { useSidebarContext } from "@/shared/contexts/ProviderSidebar";
+import { SwitchThemeButton } from "@/shared/components/SwitchThemeButton";
+import { SwitchLanguageButton } from "@/shared/components/SwitchLanguageButton";
 import { Link, useLocation } from "@tanstack/react-router";
 
 export function AppSidebar() {
   const { t } = useTranslation();
   const { open } = useSidebarContext();
   const navItems = [
-    { icon: LayoutDashboard, label: t("Sidebar.dashboard"), to: "/" },
+    { icon: LayoutDashboard, label: t("Sidebar.dashboard"), to: "/showcase" },
     { icon: FileText, label: "Forms Showcase", to: "/showcase/forms" },
     { icon: Component, label: "UI Showcase", to: "/showcase/ui" },
   ];
@@ -23,8 +22,8 @@ export function AppSidebar() {
   return (
     <aside
       className={clsx(
-        ` border-r bg-muted/40 lg:block  lg:static absolute  top-0 bottom-0 z-20 transition-all duration-300 ease-in-out lg:w-sm`,
-        open ? "left-0" : "-left-100",
+        ` border-r bg-muted/40 lg:block sticky top-0  z-20 transition-all duration-300 ease-in-out lg:w-sm max-h-screen overflow-hidden`,
+        open ? "max-lg:max-w-lg" : "max-lg:max-w-0",
       )}
     >
       <div className="flex h-full  max-lg:w-xs flex-col border-r bg-card ">

@@ -9,58 +9,85 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as appShowcaseIndexRouteImport } from './routes/(app)/showcase/index'
 import { Route as appShowcaseUiRouteImport } from './routes/(app)/showcase/ui'
 import { Route as appShowcaseFormsRouteImport } from './routes/(app)/showcase/forms'
 
+const appRouteRoute = appRouteRouteImport.update({
+  id: '/(app)',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appShowcaseIndexRoute = appShowcaseIndexRouteImport.update({
+  id: '/showcase/',
+  path: '/showcase/',
+  getParentRoute: () => appRouteRoute,
+} as any)
 const appShowcaseUiRoute = appShowcaseUiRouteImport.update({
-  id: '/(app)/showcase/ui',
+  id: '/showcase/ui',
   path: '/showcase/ui',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => appRouteRoute,
 } as any)
 const appShowcaseFormsRoute = appShowcaseFormsRouteImport.update({
-  id: '/(app)/showcase/forms',
+  id: '/showcase/forms',
   path: '/showcase/forms',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => appRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/showcase/forms': typeof appShowcaseFormsRoute
   '/showcase/ui': typeof appShowcaseUiRoute
+  '/showcase/': typeof appShowcaseIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/showcase/forms': typeof appShowcaseFormsRoute
   '/showcase/ui': typeof appShowcaseUiRoute
+  '/showcase': typeof appShowcaseIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(app)': typeof appRouteRouteWithChildren
   '/(app)/showcase/forms': typeof appShowcaseFormsRoute
   '/(app)/showcase/ui': typeof appShowcaseUiRoute
+  '/(app)/showcase/': typeof appShowcaseIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/showcase/forms' | '/showcase/ui'
+  fullPaths: '/' | '/showcase/forms' | '/showcase/ui' | '/showcase/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/showcase/forms' | '/showcase/ui'
-  id: '__root__' | '/' | '/(app)/showcase/forms' | '/(app)/showcase/ui'
+  to: '/' | '/showcase/forms' | '/showcase/ui' | '/showcase'
+  id:
+    | '__root__'
+    | '/'
+    | '/(app)'
+    | '/(app)/showcase/forms'
+    | '/(app)/showcase/ui'
+    | '/(app)/showcase/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  appShowcaseFormsRoute: typeof appShowcaseFormsRoute
-  appShowcaseUiRoute: typeof appShowcaseUiRoute
+  appRouteRoute: typeof appRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(app)': {
+      id: '/(app)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -68,27 +95,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/showcase/': {
+      id: '/(app)/showcase/'
+      path: '/showcase'
+      fullPath: '/showcase/'
+      preLoaderRoute: typeof appShowcaseIndexRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/(app)/showcase/ui': {
       id: '/(app)/showcase/ui'
       path: '/showcase/ui'
       fullPath: '/showcase/ui'
       preLoaderRoute: typeof appShowcaseUiRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof appRouteRoute
     }
     '/(app)/showcase/forms': {
       id: '/(app)/showcase/forms'
       path: '/showcase/forms'
       fullPath: '/showcase/forms'
       preLoaderRoute: typeof appShowcaseFormsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof appRouteRoute
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+interface appRouteRouteChildren {
+  appShowcaseFormsRoute: typeof appShowcaseFormsRoute
+  appShowcaseUiRoute: typeof appShowcaseUiRoute
+  appShowcaseIndexRoute: typeof appShowcaseIndexRoute
+}
+
+const appRouteRouteChildren: appRouteRouteChildren = {
   appShowcaseFormsRoute: appShowcaseFormsRoute,
   appShowcaseUiRoute: appShowcaseUiRoute,
+  appShowcaseIndexRoute: appShowcaseIndexRoute,
+}
+
+const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
+  appRouteRouteChildren,
+)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  appRouteRoute: appRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

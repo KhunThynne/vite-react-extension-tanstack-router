@@ -18,7 +18,7 @@ export const Route = createFileRoute("/(app)/showcase/ui")({
 
 function UIShowcase(): JSX.Element {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 h-[200vh]">
       <h1 className="text-3xl font-bold">UI Components Showcase</h1>
       <p className="text-muted-foreground">
         A collection of beautiful Shadcn UI components available in the system.

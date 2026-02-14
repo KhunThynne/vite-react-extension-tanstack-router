@@ -1,85 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type JSX } from "react";
-import reactLogo from "../assets/react.svg";
-import viteLogo from "/vite.svg";
-import tanstackLogo from "/tanstack.png";
-import { Button } from "@components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@components/ui/card";
-import { useTranslation } from "react-i18next";
+import { AppMain } from "@components/AppMain";
 
 export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-function Index(): JSX.Element {
-  const [count, setCount] = useState(0);
-  const { t } = useTranslation();
-  return (
-    <div className="flex items-center justify-center h-full ">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader className="text-center">
-          <div className="flex justify-center gap-4 mb-4">
-            <a href="https://vite.dev" target="_blank" rel="noreferrer">
-              <img
-                src={viteLogo}
-                className="h-16 w-16 transition-transform hover:scale-110"
-                alt="Vite logo"
-              />
-            </a>
-            <a href="https://react.dev" target="_blank" rel="noreferrer">
-              <img
-                src={reactLogo}
-                className="h-16 w-16 animate-spin-slow transition-transform hover:scale-110"
-                alt="React logo"
-              />
-            </a>
-            <a href="https://tanstack.com" target="_blank" rel="noreferrer">
-              <img
-                src={tanstackLogo}
-                className="size-17 transition-transform hover:scale-110"
-                alt="TanStack logo"
-              />
-            </a>
-          </div>
-          <CardTitle className="text-2xl font-bold">Vite</CardTitle>
-          <CardDescription>
-            Powered by Shadcn UI and Tailwind CSS
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4 text-center">
-          <div className="p-4 bg-secondary rounded-lg">
-            <p className="text-lg font-medium">{t("Index.title")}</p>
-          </div>
-          <div className="flex justify-center">
-            <Button
-              onClick={() => setCount((count) => count + 1)}
-              size="lg"
-              className="font-semibold"
-            >
-              count is {count}
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Edit{" "}
-            <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-foreground">
-              src/routes/index.tsx
-            </code>{" "}
-            and save to test HMR
-          </p>
-        </CardContent>
-        <CardFooter className="justify-center">
-          <p className="text-xs text-muted-foreground">
-            Click on the Vite and React logos to learn more
-          </p>
-        </CardFooter>
-      </Card>
+  component: () => (
+    <div className="h-screen">
+      <AppMain />
     </div>
-  );
-}
+  ),
+});

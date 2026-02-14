@@ -22,7 +22,7 @@ export default defineConfig([
     },
     rules: {
       "react-refresh/only-export-components": [
-        "off",
+        "warn",
         { allowConstantExport: true },
       ],
       "@typescript-eslint/no-unused-vars": "warn",
@@ -30,14 +30,21 @@ export default defineConfig([
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-expressions": "warn",
       "react/no-children-prop": "off",
-      "react/react-in-jsx-scope": "off",
     },
   },
   {
     files: ["**/libs/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
+      "react-refresh/only-export-components": "off",
       "@typescript-eslint/no-unused-expressions": "off",
+    },
+  },
+  {
+    files: ["**/{routes,ui,contexts}/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    ignores: ["**/*-shared/**"],
+    rules: {
+      "react-refresh/only-export-components": "off",
     },
   },
 ]);

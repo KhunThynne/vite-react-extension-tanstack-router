@@ -7,6 +7,7 @@ export interface FormPropsField {
 export type LabelDescription = {
   label?: string | React.ReactNode;
   description?: string | React.ReactNode;
+  htmlFor?: string;
 };
 
 type WithChildren<T = unknown> = T & {

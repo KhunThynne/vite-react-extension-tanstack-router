@@ -2,7 +2,7 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import { Button } from "@components/ui/button";
 import React, { Fragment, type JSX } from "react";
-import { Layout } from "@/shared/components/Layout";
+
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
   : React.lazy(() =>
@@ -33,9 +33,7 @@ const NotFound: () => JSX.Element = () => {
 export const Route = createRootRoute({
   component: () => (
     <Fragment>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <Outlet />
       <TanStackRouterDevtools />
     </Fragment>
   ),
