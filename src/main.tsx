@@ -6,7 +6,7 @@ import Provider from "./provider.tsx";
 import {
   RouterProvider,
   createRouter,
-  createMemoryHistory,
+  createBrowserHistory,
 } from "@tanstack/react-router";
 
 // Import the generated route tree
@@ -15,7 +15,7 @@ import { routeTree } from "./routeTree.gen";
 // Create a new router instance
 const router = createRouter({
   routeTree,
-  history: createMemoryHistory(),
+  history: createBrowserHistory(),
 });
 
 // Register the router instance for type safety

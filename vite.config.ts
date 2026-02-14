@@ -16,6 +16,7 @@ export default defineConfig({
     tanstackRouter({
       target: "react",
       autoCodeSplitting: true,
+      routeFileIgnorePattern: ".*_shared.*",
     }),
     tailwindcss(),
     webExtension({

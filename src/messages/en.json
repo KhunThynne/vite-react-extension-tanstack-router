@@ -11,6 +11,12 @@
     "settings": "Settings",
     "app_name": "Electron App"
   },
+  "Format": {
+    "date": "{{value, dd/MM/yyyy}}",
+    "time": "{{value, HH:mm:ss}}",
+    "datetime_id": "{{value, HHmmssddMMyyyy}}",
+    "datetime": "{{value, dd/MM/yyyy HH:mm:ss}}"
+  },
   "Settings": {
     "title": "Settings",
     "account": "Account",

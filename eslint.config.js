@@ -25,6 +25,7 @@ export default defineConfig([
       "@typescript-eslint/explicit-function-return-type": "off",
       "react-refresh/only-export-components": "warn",
       "@typescript-eslint/no-unused-expressions": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ]);
