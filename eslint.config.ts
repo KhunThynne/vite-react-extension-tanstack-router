@@ -33,4 +33,11 @@ export default defineConfig([
       "react/react-in-jsx-scope": "off",
     },
   },
+  {
+    files: ["**/libs/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+    },
+  },
 ]);
