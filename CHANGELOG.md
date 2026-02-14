@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/KhunThynne/vite-react-shadcn/compare/tan-v0.1.1...tan-v0.1.2) (2026-02-14)
+
+
+### Features
+
+* initialize tanstack router, add core ui components, and tanstack form field components ([bcfd766](https://github.com/KhunThynne/vite-react-shadcn/commit/bcfd766a2318b8a7d195c207c850f733af8869ac))
+
 ### [0.1.1](https://github.com/KhunThynne/vite-react-shadcn/compare/tan-v0.1.0...tan-v0.1.1) (2026-02-14)
 
 
