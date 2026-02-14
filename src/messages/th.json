@@ -9,7 +9,7 @@
   "Sidebar": {
     "dashboard": "แดชบอร์ด",
     "settings": "การตั้งค่า",
-    "app_name": "แอพอิเล็กตรอน"
+    "app_name": "React Vite"
   },
   "Format": {
     "date": "{{value, dd/MM/yyyy}}",

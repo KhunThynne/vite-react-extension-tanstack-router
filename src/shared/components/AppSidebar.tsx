@@ -1,6 +1,6 @@
 "use client";
 import { useTranslation } from "react-i18next";
-import { Home, LayoutDashboard, Settings } from "lucide-react";
+import { Home, LayoutDashboard, FileText, Component } from "lucide-react";
 
 import { cn } from "@components/ui/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
@@ -8,20 +8,22 @@ import clsx from "clsx";
 import { useSidebarContext } from "../contexts/ProviderSidebar";
 import { SwitchThemeButton } from "./SwitchThemeButton";
 import { SwitchLanguageButton } from "./SwitchLanguageButton";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 
 export function AppSidebar() {
   const { t } = useTranslation();
   const { open } = useSidebarContext();
   const navItems = [
     { icon: LayoutDashboard, label: t("Sidebar.dashboard"), to: "/" },
-    { icon: Settings, label: t("Sidebar.settings"), to: "/settings" },
+    { icon: FileText, label: "Forms Showcase", to: "/showcase/forms" },
+    { icon: Component, label: "UI Showcase", to: "/showcase/ui" },
   ];
 
+  const location = useLocation();
   return (
     <aside
       className={clsx(
-        ` border-r bg-muted/40 lg:block  lg:static absolute  top-0 bottom-0 z-20 transition-all duration-300 ease-in-out`,
+        ` border-r bg-muted/40 lg:block  lg:static absolute  top-0 bottom-0 z-20 transition-all duration-300 ease-in-out lg:w-sm`,
         open ? "left-0" : "-left-100",
       )}
     >

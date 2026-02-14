@@ -9,7 +9,7 @@
   "Sidebar": {
     "dashboard": "Dashboard",
     "settings": "Settings",
-    "app_name": "Electron App"
+    "app_name": "React Vite"
   },
   "Format": {
     "date": "{{value, dd/MM/yyyy}}",

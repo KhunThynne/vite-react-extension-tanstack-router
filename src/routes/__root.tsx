@@ -1,8 +1,15 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import { Button } from "@components/ui/button";
-
+import React, { Fragment } from "react";
+import { Layout } from "@/shared/components/Layout";
+const TanStackRouterDevtools = import.meta.env.PROD
+  ? () => null
+  : React.lazy(() =>
+      import("@tanstack/react-router-devtools").then((res) => ({
+        default: res.TanStackRouterDevtools,
+      })),
+    );
 const NotFound = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-neutral-100 dark:bg-neutral-900 p-4">
@@ -25,10 +32,15 @@ const NotFound = () => {
 
 export const Route = createRootRoute({
   component: () => (
-    <>
-      <Outlet />
+    <Fragment>
+      <Layout>
+        <Outlet />
+      </Layout>
       <TanStackRouterDevtools />
-    </>
+    </Fragment>
   ),
+  loader: () => {
+    return <>Loading</>;
+  },
   notFoundComponent: NotFound,
 });

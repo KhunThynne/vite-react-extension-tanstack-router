@@ -22,7 +22,7 @@ function Index() {
   const [count, setCount] = useState(0);
   const { t } = useTranslation();
   return (
-    <div className="flex items-center justify-center min-h-screen bg-neutral-100 dark:bg-neutral-900 p-4">
+    <div className="flex items-center justify-center h-full ">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="text-center">
           <div className="flex justify-center gap-4 mb-4">
