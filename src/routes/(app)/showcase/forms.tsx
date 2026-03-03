@@ -4,9 +4,11 @@ import { Button } from "@/shared/components/ui/button";
 import { ContainerSection } from "@/shared/components/ContainerSection";
 import { useAppForm } from "@/shared/hooks/useAppForm";
 import { Card, CardContent } from "@/shared/components/ui/card";
+import { PendingComponent as pendingComponent } from "@/shared/components/PendingComponent";
 
 export const Route = createFileRoute("/(app)/showcase/forms")({
   component: FormsShowcase,
+  pendingComponent,
 });
 
 function FormsShowcase() {

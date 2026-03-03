@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "./ui/button";
+import { Button } from "@/shared/components/ui/button";
 import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 import tanstackLogo from "/tanstack.png";
@@ -11,7 +11,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "./ui/card";
+} from "@/shared/components/ui/card";
 import { Link } from "@tanstack/react-router";
 
 export function AppMain() {
