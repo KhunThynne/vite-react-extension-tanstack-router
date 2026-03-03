@@ -1,4 +1,3 @@
-import { Spinner } from "@/shared/components/ui/spinner";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +7,6 @@ import {
   DialogOverlay,
 } from "@/shared/components/ui/dialog";
 
-import { CheckCircle, XCircle } from "lucide-react";
 
 export type StatusType = "loading" | "success" | "error";
 
