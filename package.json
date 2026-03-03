@@ -1,12 +1,12 @@
 {
   "name": "vite-react",
   "private": true,
-  "version": "0.1.2",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "generate-routes": "tsr generate",
     "watch-routes": "tsr watch",
-    "release": "standard-version --tag-prefix \"tan-v\"",
+    "release": "standard-version",
     "update": "npx npm-check-updates --dep prod,dev --upgrade",
     "dev": "vite",
     "build": "npm run generate-routes &&tsc -b && vite build",
