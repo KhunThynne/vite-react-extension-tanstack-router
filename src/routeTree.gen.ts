@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as appShowcaseIndexRouteImport } from './routes/(app)/showcase/index'
 import { Route as appShowcaseUiRouteImport } from './routes/(app)/showcase/ui'
 import { Route as appShowcaseFormsRouteImport } from './routes/(app)/showcase/forms'
+import { Route as appShowcaseDbRouteImport } from './routes/(app)/showcase/db'
 
 const appRouteRoute = appRouteRouteImport.update({
   id: '/(app)',
@@ -39,15 +40,22 @@ const appShowcaseFormsRoute = appShowcaseFormsRouteImport.update({
   path: '/showcase/forms',
   getParentRoute: () => appRouteRoute,
 } as any)
+const appShowcaseDbRoute = appShowcaseDbRouteImport.update({
+  id: '/showcase/db',
+  path: '/showcase/db',
+  getParentRoute: () => appRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/showcase/db': typeof appShowcaseDbRoute
   '/showcase/forms': typeof appShowcaseFormsRoute
   '/showcase/ui': typeof appShowcaseUiRoute
   '/showcase/': typeof appShowcaseIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/showcase/db': typeof appShowcaseDbRoute
   '/showcase/forms': typeof appShowcaseFormsRoute
   '/showcase/ui': typeof appShowcaseUiRoute
   '/showcase': typeof appShowcaseIndexRoute
@@ -56,19 +64,26 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(app)': typeof appRouteRouteWithChildren
+  '/(app)/showcase/db': typeof appShowcaseDbRoute
   '/(app)/showcase/forms': typeof appShowcaseFormsRoute
   '/(app)/showcase/ui': typeof appShowcaseUiRoute
   '/(app)/showcase/': typeof appShowcaseIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/showcase/forms' | '/showcase/ui' | '/showcase/'
+  fullPaths:
+    | '/'
+    | '/showcase/db'
+    | '/showcase/forms'
+    | '/showcase/ui'
+    | '/showcase/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/showcase/forms' | '/showcase/ui' | '/showcase'
+  to: '/' | '/showcase/db' | '/showcase/forms' | '/showcase/ui' | '/showcase'
   id:
     | '__root__'
     | '/'
     | '/(app)'
+    | '/(app)/showcase/db'
     | '/(app)/showcase/forms'
     | '/(app)/showcase/ui'
     | '/(app)/showcase/'
@@ -116,16 +131,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appShowcaseFormsRouteImport
       parentRoute: typeof appRouteRoute
     }
+    '/(app)/showcase/db': {
+      id: '/(app)/showcase/db'
+      path: '/showcase/db'
+      fullPath: '/showcase/db'
+      preLoaderRoute: typeof appShowcaseDbRouteImport
+      parentRoute: typeof appRouteRoute
+    }
   }
 }
 
 interface appRouteRouteChildren {
+  appShowcaseDbRoute: typeof appShowcaseDbRoute
   appShowcaseFormsRoute: typeof appShowcaseFormsRoute
   appShowcaseUiRoute: typeof appShowcaseUiRoute
   appShowcaseIndexRoute: typeof appShowcaseIndexRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
+  appShowcaseDbRoute: appShowcaseDbRoute,
   appShowcaseFormsRoute: appShowcaseFormsRoute,
   appShowcaseUiRoute: appShowcaseUiRoute,
   appShowcaseIndexRoute: appShowcaseIndexRoute,

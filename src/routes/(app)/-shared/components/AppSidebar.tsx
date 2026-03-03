@@ -1,8 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { Home, LayoutDashboard, FileText, Component } from "lucide-react";
+import { Home, LayoutDashboard, FileText, Component, Database } from "lucide-react";
 
 import { cn } from "@/shared/components/ui/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/shared/components/ui/avatar";
 import clsx from "clsx";
 import { useSidebarContext } from "@/shared/contexts/ProviderSidebar";
 import { SwitchThemeButton } from "@/shared/components/SwitchThemeButton";
@@ -16,6 +20,7 @@ export function AppSidebar() {
     { icon: LayoutDashboard, label: t("Sidebar.dashboard"), to: "/showcase" },
     { icon: FileText, label: "Forms Showcase", to: "/showcase/forms" },
     { icon: Component, label: "UI Showcase", to: "/showcase/ui" },
+    { icon: Database, label: "DB Showcase", to: "/showcase/db" },
   ];
 
   const location = useLocation();
