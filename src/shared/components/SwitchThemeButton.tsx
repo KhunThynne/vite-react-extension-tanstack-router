@@ -1,6 +1,6 @@
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 
 export const SwitchThemeButton = () => {
   const { setTheme, theme } = useTheme();

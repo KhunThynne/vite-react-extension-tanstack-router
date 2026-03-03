@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Home, LayoutDashboard, FileText, Component } from "lucide-react";
 
-import { cn } from "@components/ui/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
+import { cn } from "@/shared/components/ui/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
 import clsx from "clsx";
 import { useSidebarContext } from "@/shared/contexts/ProviderSidebar";
 import { SwitchThemeButton } from "@/shared/components/SwitchThemeButton";

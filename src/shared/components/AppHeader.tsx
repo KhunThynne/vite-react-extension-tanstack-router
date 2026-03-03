@@ -1,5 +1,5 @@
 import { Bell, Menu } from "lucide-react";
-import { Button } from "@components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { useSidebarContext } from "../contexts/ProviderSidebar";
 import clsx from "clsx";
 

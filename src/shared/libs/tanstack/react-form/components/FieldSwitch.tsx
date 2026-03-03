@@ -4,15 +4,15 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@components/ui/field";
+} from "@/shared/components/ui/field";
 
 import { useField, useStore } from "@tanstack/react-form";
 import { useFieldContext } from "../hooks";
 import FieldErrorI18nMessage from "./shared/FieldErrorI18nMessage";
 
 import type { LabelDescription, WithClassNames } from "./type";
-import { Switch } from "@components/ui/switch";
-import { cn } from "@components/ui/utils";
+import { Switch } from "@/shared/components/ui/switch";
+import { cn } from "@/shared/components/ui/utils";
 import { useId } from "react";
 
 type FieldSwitchProps = LabelDescription &

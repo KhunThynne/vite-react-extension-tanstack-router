@@ -2,8 +2,8 @@ import { Fragment } from "react";
 
 import { Asterisk } from "lucide-react";
 import type { LabelDescription, WithClassNames } from "../type";
-import { FieldLabel, FieldDescription } from "@components/ui/field";
-import { cn } from "@components/ui/utils";
+import { FieldLabel, FieldDescription } from "@/shared/components/ui/field";
+import { cn } from "@/shared/components/ui/utils";
 
 export default function LabelAndDescriptionFieldForm({
   classNames,

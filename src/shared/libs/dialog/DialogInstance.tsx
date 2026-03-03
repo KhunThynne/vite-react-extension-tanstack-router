@@ -8,7 +8,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from "@components/ui/dialog";
+} from "@/shared/components/ui/dialog";
 import type { DialogInstanceProps } from "./index.type";
 import {
   createContext,

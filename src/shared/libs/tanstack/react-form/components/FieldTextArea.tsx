@@ -1,12 +1,12 @@
-import { Field } from '@components/ui/field'
+import { Field } from '@/shared/components/ui/field'
 import { useStore } from '@tanstack/react-form'
 import { useFieldContext } from '../hooks'
 import LabelAndDescriptionFieldForm from './shared/LabelAndDescriptionFieldForm'
 import FieldErrorI18nMessage from './shared/FieldErrorI18nMessage'
 
-import { Textarea } from '@components/ui/textarea'
+import { Textarea } from '@/shared/components/ui/textarea'
 import type { LabelDescription, WithClassNames } from './type'
-import { cn } from '@components/ui/utils'
+import { cn } from '@/shared/components/ui/utils'
 
 type FieldTextAreaProps = LabelDescription &
   React.ComponentProps<typeof Textarea> &

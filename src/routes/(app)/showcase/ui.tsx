@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,9 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@components/ui/card";
-import { Badge } from "@components/ui/badge";
-import { ContainerSection } from "@components/ContainerSection";
+} from "@/shared/components/ui/card";
+import { Badge } from "@/shared/components/ui/badge";
+import { ContainerSection } from "@/shared/components/ContainerSection";
 import type { JSX } from "react";
 
 export const Route = createFileRoute("/(app)/showcase/ui")({

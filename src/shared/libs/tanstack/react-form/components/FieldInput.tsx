@@ -8,14 +8,14 @@ import type { LabelDescription, WithClassNames } from "./type";
 import { Eye, EyeClosed, X } from "lucide-react";
 
 import { useId, useMemo, useState } from "react";
-import { Input } from "@components/ui/input";
+import { Input } from "@/shared/components/ui/input";
 import {
   InputGroup,
   InputGroupInput,
   InputGroupAddon,
-} from "@components/ui/input-group";
-import { cn } from "@components/ui/utils";
-import { Field } from "@components/ui/field";
+} from "@/shared/components/ui/input-group";
+import { cn } from "@/shared/components/ui/utils";
+import { Field } from "@/shared/components/ui/field";
 
 type FieldInputProps = LabelDescription &
   React.ComponentProps<typeof Input> & {

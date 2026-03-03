@@ -12,8 +12,8 @@ import {
   FieldContent,
   FieldTitle,
   FieldDescription
-} from '@components/ui/field'
-import { cn } from '@components/ui/utils'
+} from '@/shared/components/ui/field'
+import { cn } from '@/shared/components/ui/utils'
 
 type CommonClassNames = WithClassNames<'container' | 'title' | 'description' | 'section'>
 export type RadioFieldItemProps = LabelDescription &

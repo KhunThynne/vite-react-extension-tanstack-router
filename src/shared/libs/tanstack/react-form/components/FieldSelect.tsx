@@ -13,8 +13,8 @@ import {
   SelectLabel,
   SelectItem
 } from '@radix-ui/react-select'
-import { cn } from '@components/ui/utils'
-import { Field } from '@components/ui/field'
+import { cn } from '@/shared/components/ui/utils'
+import { Field } from '@/shared/components/ui/field'
 
 type Option = {
   label: string

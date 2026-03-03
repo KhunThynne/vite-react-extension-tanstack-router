@@ -49,7 +49,7 @@ This will generate the optimized files in the `dist` directory.
 - `src/App.tsx`: The main entry component, showcasing Shadcn UI integration.
 - `src/shared/components/ui`: directory containing your installed Shadcn UI components.
 - `src/shared/libs`: Utility libraries and configurations.
-- `vite.config.ts`: Vite configuration with path aliases (`@`, `@components`).
+- `vite.config.ts`: Vite configuration with path aliases (`@`, `@/shared/components`).
 
 ## 🎨 UI Components
 

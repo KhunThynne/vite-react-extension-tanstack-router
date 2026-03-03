@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { Button } from "@components/ui/button";
-import { ContainerSection } from "@components/ContainerSection";
-import { useAppForm } from "@hooks/useAppForm";
+import { Button } from "@/shared/components/ui/button";
+import { ContainerSection } from "@/shared/components/ContainerSection";
+import { useAppForm } from "@/shared/hooks/useAppForm";
 import { Card, CardContent } from "@/shared/components/ui/card";
 
 export const Route = createFileRoute("/(app)/showcase/forms")({

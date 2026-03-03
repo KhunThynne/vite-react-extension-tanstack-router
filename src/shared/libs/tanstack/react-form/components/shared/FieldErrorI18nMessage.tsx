@@ -1,7 +1,7 @@
 import { useFieldContext } from '../../hooks'
 import { useStore } from '@tanstack/react-form'
-import { FieldError } from '@components/ui/field'
-import { cn } from '@components/ui/utils'
+import { FieldError } from '@/shared/components/ui/field'
+import { cn } from '@/shared/components/ui/utils'
 
 export default function FieldFieldErrorI18nMessage({
   className,

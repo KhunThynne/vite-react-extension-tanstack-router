@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AppMain } from "@components/AppMain";
+import { AppMain } from "@/shared/components/AppMain";
 
 export const Route = createFileRoute("/")({
   component: () => (

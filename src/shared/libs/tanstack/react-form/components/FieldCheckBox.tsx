@@ -4,9 +4,9 @@ import FieldErrorI18nMessage from "./shared/FieldErrorI18nMessage";
 
 import type { WithClassNames, LabelDescription } from "./type";
 
-import { Field, FieldGroup, FieldLabel } from "@components/ui/field";
-import { cn } from "@components/ui/utils";
-import { Checkbox } from "@components/custom/checkbox";
+import { Field, FieldGroup, FieldLabel } from "@/shared/components/ui/field";
+import { cn } from "@/shared/components/ui/utils";
+import { Checkbox } from "@/shared/components/custom/checkbox";
 import { useId } from "react";
 
 type FieldSelectProps = LabelDescription &

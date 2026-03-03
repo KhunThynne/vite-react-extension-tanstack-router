@@ -1,4 +1,4 @@
-import { Button } from '@components/ui/button'
+import { Button } from '@/shared/components/ui/button'
 import { useFormContext } from '../hooks/form-context'
 
 export default function SubscribeButton({

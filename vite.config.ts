@@ -10,10 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
-      "@components": resolve(__dirname, "src/shared/components"),
-      "@libs": resolve(__dirname, "src/shared/libs"),
-      "@contexts": resolve(__dirname, "src/shared/contexts"),
-      "@hooks": resolve(__dirname, "src/shared/hooks"),
+      "@shared": resolve(__dirname, "src/shared"),
     },
   },
   plugins: [

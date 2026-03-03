@@ -9,9 +9,16 @@ export default function generateManifest(): chrome.runtime.ManifestV3 {
     description: pkg.description || "My React Extension",
 
     background: {
-      service_worker: "src/background.ts",
+      service_worker: "src/extensiom-core/background/index.ts",
       type: "module",
     },
+
+    content_scripts: [
+      {
+        matches: ["<all_urls>"],
+        js: ["src/extensiom-core/content_scripts/index.ts"],
+      },
+    ],
 
     permissions: [
       "storage",
