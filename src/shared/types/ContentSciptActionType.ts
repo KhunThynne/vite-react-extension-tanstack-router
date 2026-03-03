@@ -1,6 +1,7 @@
 import type { BaseAction } from "@/shared/types/BaseAction";
 
-type BoilerAction = BaseAction<"Boiler", void, string>;
+type BoilerAction = BaseAction<"Boiler", { id: string }, string>;
+
 export type ContentScriptActionType = BoilerAction;
 export type ActionPayload<T extends ContentScriptActionType["type"]> = Extract<
   ContentScriptActionType,

@@ -23,7 +23,7 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@@/*": ["./src/shared/*"]
     }
   },
   "include": ["vite.config.ts"]

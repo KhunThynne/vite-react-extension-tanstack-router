@@ -10,10 +10,10 @@ export const Route = createFileRoute("/(app)")({
 function AppLayout() {
   return (
     <div className="flex min-h-screen w-full bg-muted/40">
-      <AppSidebar />
+      <AppSidebar className=" " />
       <div
         className={clsx(
-          "flex flex-col transition-all duration-300 ease-in-out w-full overflow-auto",
+          "flex flex-col transition-all duration-300 ease-in-out grow  overflow-auto",
         )}
       >
         <AppHeader />

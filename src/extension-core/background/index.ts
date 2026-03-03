@@ -1,3 +1,4 @@
+import { chromeService } from "@/shared/services/chrome";
 import type { ContentScriptActionType } from "@/shared/types/ContentSciptActionType";
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -6,6 +7,11 @@ chrome.runtime.onInstalled.addListener(() => {
     .catch((error) => console.error(error));
 });
 
+chromeService.onMessage({
+  Boiler: ({ payload, sender }) => {
+    return "Boiler response" + payload.id;
+  },
+});
 chrome.runtime.onMessage.addListener(
   (message: ContentScriptActionType, _sender, sendResponse) => {
     switch (message.type) {

@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { eq, useLiveQuery } from "@tanstack/react-db";
-import { userCollection } from "@/db";
+import { useLiveQuery } from "@tanstack/react-db";
 import { Button } from "@/shared/components/ui/button";
+import db from "@/db";
 export const Route = createFileRoute("/(app)/showcase/db")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { data } = useLiveQuery((q) => q.from({ user: userCollection }));
+  const { data } = useLiveQuery((q) => q.from({ user: db.user }));
+
   const handleInsert = () => {
-    userCollection.insert({
+    db.user.insert({
       id: crypto.randomUUID(),
       name: "John",
       email: "TEst@test.com",
@@ -20,6 +21,7 @@ function RouteComponent() {
     <div>
       Hello "/(app)/showcase/db"!
       <Button onClick={handleInsert}>Inert </Button>
+      <div>{JSON.stringify(data)}</div>
     </div>
   );
 }

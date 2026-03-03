@@ -1,11 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  Home,
-  LayoutDashboard,
-  FileText,
-  Component,
-  Database,
-} from "lucide-react";
+import { Home, LayoutDashboard, FileText, Component, Database } from "lucide-react";
 
 import { cn } from "@/shared/components/ui/utils";
 import {
@@ -18,8 +12,8 @@ import { useSidebarContext } from "@/shared/contexts/ProviderSidebar";
 import { SwitchThemeButton } from "@/shared/components/SwitchThemeButton";
 import { SwitchLanguageButton } from "@/shared/components/SwitchLanguageButton";
 import { Link, useLocation } from "@tanstack/react-router";
-const AppName = import.meta.env.VITE_APP_NAME;
-export function AppSidebar({ className }: { className?: string }) {
+
+export function AppSidebar() {
   const { t } = useTranslation();
   const { open } = useSidebarContext();
   const navItems = [
@@ -33,25 +27,21 @@ export function AppSidebar({ className }: { className?: string }) {
   return (
     <aside
       className={clsx(
-        `lg:block sticky top-0  z-20 transition-all duration-300 ease-in-out  overflow-hidden @container`,
-        ` border-r bg-muted/40  max-h-screen  flex-none sm:w-xs w-20`,
-        className,
-        open ? "max-lg:max-w-sm" : "max-lg:max-w-0 ",
+        ` border-r bg-muted/40 lg:block sticky top-0  z-20 transition-all duration-300 ease-in-out lg:w-sm max-h-screen overflow-hidden`,
+        open ? "max-lg:max-w-lg" : "max-lg:max-w-0",
       )}
     >
-      <div className="flex h-full flex-col border-r bg-card w-full">
-        <div className="flex h-14 items-center @max-3xs:justify-center border-b px-4 lg:h-[60px] lg:px-6 ">
+      <div className="flex h-full  max-lg:w-xs flex-col border-r bg-card ">
+        <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 ">
           <Link to="/" className="flex items-center gap-2 font-semibold">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Home className="size-5" />
             </div>
-            <span className="@max-3xs:hidden">
-              {AppName ?? t("Sidebar.app_name")}
-            </span>
+            <span>{t("Sidebar.app_name")}</span>
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-4">
-          <nav className="grid gap-1 px-2 @max-3xs:place-content-center">
+          <nav className="grid gap-1 px-2">
             {navItems.map((item, index) => {
               const isActive = item.to === location.pathname;
               return (
@@ -65,14 +55,14 @@ export function AppSidebar({ className }: { className?: string }) {
                       : "text-muted-foreground",
                   )}
                 >
-                  <item.icon />
-                  <span className="@max-3xs:hidden">{item.label}</span>
+                  <item.icon className="h-4 w-4" />
+                  {item.label}
                 </Link>
               );
             })}
           </nav>
         </div>
-        <div className="p-4  flex @max-3xs:flex-col items-center justify-end gap-2">
+        <div className="p-4 flex justify-end gap-2">
           <SwitchThemeButton />
           <SwitchLanguageButton />
         </div>
@@ -82,7 +72,7 @@ export function AppSidebar({ className }: { className?: string }) {
               <AvatarImage src="/avatars/01.png" alt="@user" />
               <AvatarFallback>US</AvatarFallback>
             </Avatar>
-            <div className="grid gap-1 @max-3xs:hidden">
+            <div className="grid gap-1">
               <p className="text-sm font-medium leading-none">User Name</p>
               <p className="text-xs text-muted-foreground">user@example.com</p>
             </div>
