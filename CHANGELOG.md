@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.1...v0.0.2) (2026-03-04)
+
+
+### Features
+
+* Implement RxDB for client-side database management with user and account schemas, a database initialization, and a showcase UI. ([60555b4](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/60555b4c0bbcba1654d0cb8a308759db6e8a71c0))
+* Introduce IndexedDB integration, routing, foundational UI components, and a type-safe Chrome messaging system for the extension. ([61cb007](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/61cb00762e5dad85b353841184e664b4b0d3475e))
+
 ### 0.0.1 (2026-03-03)
 
 
