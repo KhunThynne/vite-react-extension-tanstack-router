@@ -1,5 +1,4 @@
 import { chromeService } from "@/shared/services/chrome";
-import type { ContentScriptActionType } from "@/shared/types/ContentSciptActionType";
 
 chromeService.runtime.onInstalled.addListener(() => {
   chrome.sidePanel
@@ -8,7 +7,7 @@ chromeService.runtime.onInstalled.addListener(() => {
 });
 
 chromeService.runtime.onMessage.addListenerService({
-  Boiler: ({ payload, sender }) => {
+  Boiler: ({ payload }) => {
     return "Boiler response" + payload.id;
   },
 });

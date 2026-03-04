@@ -18,7 +18,7 @@ export const chromeService = {
 };
 
 chromeService.runtime.onMessage.addListenerService({
-  Boiler: (payload) => {
+  Boiler: () => {
     return "Boiler response";
   },
 });

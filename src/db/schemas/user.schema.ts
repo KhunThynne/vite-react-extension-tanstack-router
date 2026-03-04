@@ -1,18 +1,34 @@
-// Removed unused createCollection import
-import { z } from "zod";
-const userSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.email(),
-  createdAt: z.number(),
-});
-type UserDBType = z.infer<typeof userSchema>;
-import { createPersistentCollection } from "../utils/factory";
-const userCollection = createPersistentCollection<UserDBType>({
-  schema: userSchema,
-  storeName: "users",
-});
+import type { RxJsonSchema } from "rxdb";
+type UserDBType = {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: number;
+};
 
-
-export { userCollection, userSchema };
+const userSchema: RxJsonSchema<UserDBType> = {
+  title: "human schema",
+  description: "describes a human being",
+  version: 0,
+  keyCompression: false,
+  primaryKey: "id",
+  type: "object",
+  properties: {
+    id: {
+      type: "string",
+      maxLength: 40,
+    },
+    name: {
+      type: "string",
+    },
+    email: {
+      type: "string",
+    },
+    createdAt: {
+      type: "number",
+    },
+  },
+  required: ["id", "name", "email", "createdAt"],
+} as const;
+export { userSchema };
 export type { UserDBType };
