@@ -11,6 +11,10 @@ export interface AppDBSchema extends DBSchema {
     key: string;
     value: UserDBType;
   };
+  test: {
+    key: string;
+    value: any;
+  };
   accounts: {
     key: string;
     value: AccountDBType;
@@ -25,6 +29,9 @@ export function getDb(): Promise<IDBPDatabase<AppDBSchema>> {
       upgrade(db) {
         if (!db.objectStoreNames.contains("users")) {
           db.createObjectStore("users", { keyPath: "id" });
+        }
+        if (!db.objectStoreNames.contains("test")) {
+          db.createObjectStore("test", { keyPath: "id" });
         }
         if (!db.objectStoreNames.contains("accounts")) {
           db.createObjectStore("accounts", { keyPath: "id" });

@@ -1,5 +1,5 @@
 import { AppHeader } from "@/shared/components/AppHeader";
-import { AppSidebar } from "@/routes/(app)/-shared/components/AppSidebar";
+import { AppSidebar } from "@@/components/AppSidebar";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import clsx from "clsx";
 

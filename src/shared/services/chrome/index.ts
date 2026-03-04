@@ -1,8 +1,24 @@
-import { sendMessageToTab, sendMessage } from "./sendMessageToTab";
-import { createMessageListener } from "./createMessageListener";
+import { sendMessageToTab, sendMessage } from "./sendMessageServices";
+import { createMessageListenerService } from "./createMessageListenerService";
 
 export const chromeService = {
-  sendToTab: sendMessageToTab,
-  send: sendMessage,
-  onMessage: createMessageListener,
+  ...chrome,
+  tabs: {
+    ...chrome.tabs,
+    sendMessage: sendMessageToTab,
+  },
+  runtime: {
+    ...chrome.runtime,
+    sendMessage: sendMessage,
+    onMessage: {
+      ...chrome.runtime.onMessage,
+      addListenerService: createMessageListenerService,
+    },
+  },
 };
+
+chromeService.runtime.onMessage.addListenerService({
+  Boiler: (payload) => {
+    return "Boiler response";
+  },
+});

@@ -5,10 +5,13 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import { defineConfig, globalIgnores } from "eslint/config";
 import pluginReact from "eslint-plugin-react";
+import pluginQuery from "@tanstack/eslint-plugin-query";
+
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig([
   globalIgnores(["dist", "**/*.d.ts"]),
   js.configs.recommended,
+  ...pluginQuery.configs["flat/recommended"],
   ...tseslint.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
