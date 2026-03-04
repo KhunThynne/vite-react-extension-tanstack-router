@@ -48,12 +48,12 @@ type MessageHandler<T extends ContentScriptActionType> = (
  * * @param handlers - A partial map of all possible Action types to their specific handling functions.
  */
 
-export function createMessageListener(handlers: {
+export function createMessageListenerService(handlers: {
   [K in ContentScriptActionType["type"]]?: MessageHandler<
     Extract<ContentScriptActionType, { type: K }>
   >;
 }) {
-  chrome.runtime.onMessage.addListener(
+  chrome["runtime"].onMessage.addListener(
     (message: ContentScriptActionType, sender, sendResponse) => {
       const handler = handlers[
         message.type

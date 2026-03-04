@@ -8,10 +8,11 @@ const userSchema = z.object({
 });
 type UserDBType = z.infer<typeof userSchema>;
 import { createPersistentCollection } from "../utils/factory";
-
 const userCollection = createPersistentCollection<UserDBType>({
   schema: userSchema,
   storeName: "users",
 });
+
+
 export { userCollection, userSchema };
 export type { UserDBType };
