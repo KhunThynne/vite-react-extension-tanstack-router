@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.2...v0.0.3) (2026-03-08)
+
+
+### Bug Fixes
+
+* add init setupdb form cross env ([1f03781](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/1f03781a0d0fb6b27069bed919ea284cec99a4cd))
+
 ### [0.0.2](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.1...v0.0.2) (2026-03-04)
 
 
