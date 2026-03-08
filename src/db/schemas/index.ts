@@ -1,7 +1,22 @@
-import { userSchema } from "./user.schema";
-import { accountSchema } from "./account.schema";
+import { type RxJsonSchema } from "rxdb";
+import { type RxDBCollectionConfig } from "@tanstack/rxdb-db-collection";
+import * as user from "./user.schema";
+import * as account from "./account.schema";
+
+/**
+ * LAYER 4: SCHEMA ORCHESTRATION TYPE
+ * This type ensures that every entry in allSchemas either:
+ * 1. Contains both 'schema' and 'collectionOptions' (Full Config)
+ * 2. Or is just a raw 'RxJsonSchema' (Basic Config)
+ */
+type CollectionDefinition<T extends object = never> = {
+  schema: RxJsonSchema<T>;
+  collectionOption?: Omit<RxDBCollectionConfig<T, never>, "rxCollection">;
+};
 
 export const allSchemas = {
-  user: userSchema,
-  account: accountSchema,
-};
+  user,
+  account,
+} satisfies Record<string, CollectionDefinition>;
+
+export type SchemaRegistry = typeof allSchemas;

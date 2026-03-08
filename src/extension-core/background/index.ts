@@ -1,5 +1,6 @@
+import db, { setupDatabase } from "@/db";
 import { chromeService } from "@/shared/services/chrome";
-
+setupDatabase().catch((err) => console.error("Initialization error", err));
 chromeService.runtime.onInstalled.addListener(() => {
   chrome.sidePanel
     .setPanelBehavior({ openPanelOnActionClick: true })
@@ -8,17 +9,7 @@ chromeService.runtime.onInstalled.addListener(() => {
 
 chromeService.runtime.onMessage.addListenerService({
   Boiler: ({ payload }) => {
+    db.user.get(payload.id);
     return "Boiler response" + payload.id;
   },
 });
-// chromeService.runtime.onMessage.addListenerService(
-//   (message: ContentScriptActionType, _sender, sendResponse) => {
-//     switch (message.type) {
-//       case "Boiler":
-//         sendResponse("Boiler response");
-//         return true;
-//       default:
-//         return false;
-//     }
-//   },
-// );

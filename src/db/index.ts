@@ -1,59 +1,112 @@
-// import { accountCollection } from "./schemas/account.schema";
-// import { userCollection } from "./schemas/user.schema";
-
+import { createCollection, type Collection } from "@tanstack/react-db";
+import { rxdbCollectionOptions } from "@tanstack/rxdb-db-collection";
+import _ from "lodash";
 import {
   createRxDatabase,
   addRxPlugin,
+  removeRxDatabase,
+  type RxJsonSchema,
+  type RxDatabase,
 } from "rxdb/plugins/core";
-
-/**
- * Here we use the localStorage based storage for RxDB.
- * RxDB has a wide range of storages based on Dexie.js, IndexedDB, SQLite, and more.
- */
-
-// add json-schema validation (optional)
-import { wrappedValidateAjvStorage } from "rxdb/plugins/validate-ajv";
-import { rxdbCollectionOptions } from "@tanstack/rxdb-db-collection";
-// Enable dev mode (optional, recommended during development)
 import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
 import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
-
-addRxPlugin(RxDBDevModePlugin);
-import _ from "lodash";
-import { createCollection } from "@tanstack/react-db";
+import { wrappedValidateAjvStorage } from "rxdb/plugins/validate-ajv";
 import { allSchemas } from "./schemas";
 
-const RdxDB = await createRxDatabase({
-  name: _.kebabCase(import.meta.env.VITE_CLIENT_DB_NAME ?? "client-db"),
-  storage: wrappedValidateAjvStorage({
-    storage: getRxStorageDexie(),
-  }),
-});
-type SchemaKeys = keyof typeof allSchemas;
+// --- LAYER 1: INITIALIZATION & PLUGINS ---
+if (import.meta.env.DEV) {
+  addRxPlugin(RxDBDevModePlugin);
+}
 
+// --- LAYER 3: TYPE ORCHESTRATION ---
+type SchemaRegistry = typeof allSchemas;
+type SchemaKeys = keyof SchemaRegistry;
 
-type AppDatabase = {
-  [K in SchemaKeys]: unknown;
+type ExtractDocType<T> = T extends { schema: RxJsonSchema<infer D> }
+  ? D
+  : never;
+
+export type AppDatabase = {
+  [K in SchemaKeys]: Collection<ExtractDocType<SchemaRegistry[K]>, string>;
 };
-await RdxDB.addCollections(
-  Object.fromEntries(
-    Object.entries(allSchemas).map(([name, schema]) => [name, { schema }]),
-  ),
-);
 
-const db = {} as AppDatabase;
-(Object.keys(allSchemas) as SchemaKeys[]).forEach((name) => {
-  db[name] = createCollection(
-    rxdbCollectionOptions({
-      rxCollection: RdxDB[name],
-      startSync: true,
-    }),
-  );
-});
+// --- LAYER 2 & 4: ASYNC SETUP WRAPPER ---
 
+// 1. Export RdxDB as a let variable to avoid Top-Level Await (TLA) errors in IIFE formats
+export let RdxDB: RxDatabase | null = null;
 
+// 2. Export db as a constant empty object to be populated later; maintains AppDatabase type
+export const db = {} as AppDatabase;
 
-export default db as {
-  [K in keyof typeof allSchemas]: ReturnType<typeof createCollection>;
+const DB_NAME = _.kebabCase(import.meta.env.VITE_CLIENT_DB_NAME ?? "client-db");
+const STORAGE = wrappedValidateAjvStorage({ storage: getRxStorageDexie() });
+
+/**
+ * setupDatabase: Wraps Layer 2 and 4 logic into a single function.
+ * This allows asynchronous initialization at the appropriate entry point.
+ */
+export async function setupDatabase() {
+  // Singleton Check: If already initialized, return existing db immediately
+  if (RdxDB && Object.keys(db).length > 0) return db;
+
+  try {
+    // --- LAYER 2: DATABASE INSTANCE ---
+    RdxDB = await createRxDatabase({
+      name: DB_NAME,
+      storage: STORAGE,
+      ignoreDuplicate: true,
+    });
+
+    // --- LAYER 4: COLLECTION REGISTRATION ---
+
+    // 1. Register Physical Collections to RxDB
+    await RdxDB.addCollections(
+      Object.fromEntries(
+        Object.entries(allSchemas).map(([name, config]) => [
+          name,
+          {
+            schema: config.schema,
+          },
+        ]),
+      ) as never,
+    );
+
+    // 2. Create Reactive TanStack Layer
+    (Object.keys(allSchemas) as SchemaKeys[]).forEach((name) => {
+      const config = allSchemas[name];
+      const rxCol = RdxDB![name];
+      if (!rxCol) return;
+
+      const options = (config as any).collectionOption ?? { startSync: true };
+
+      // Populate the exported db object with TanStack collections
+      db[name] = createCollection(
+        rxdbCollectionOptions({
+          rxCollection: rxCol,
+          ...options,
+        } as never),
+      ) as never;
+    });
+
+    console.log("✅ Database and TanStack Layer initialized");
+    return db;
+  } catch (error) {
+    // Fallback: If schema mismatch occurs, wipe DB and reload (Self-healing)
+    console.error("❌ DB Setup failed:", error);
+    try {
+      await removeRxDatabase(DB_NAME, STORAGE);
+      if (typeof window !== "undefined") window.location.reload();
+    } catch (wipeError) {
+      console.error("💀 Fatal wipe error:", wipeError);
+    }
+    throw error;
+  }
+}
+
+// --- REMAINING TYPES ---
+export type Models = {
+  [K in keyof SchemaRegistry]: ExtractDocType<SchemaRegistry[K]>;
 };
+export type DBModel<K extends keyof Models> = Models[K];
+export default db;
 export type DBType = typeof db;

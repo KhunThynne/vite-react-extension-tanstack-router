@@ -18,6 +18,7 @@
 // export { accountCollection, accountSchema };
 // export type { AccountDBType };
 
+import type { RxDBCollectionConfig } from "@tanstack/rxdb-db-collection";
 import type { RxJsonSchema } from "rxdb";
 import z from "zod";
 
@@ -28,7 +29,7 @@ const accountSchemaZod = z.object({
   lastLogin: z.string(), // ISO date string preferred here
 });
 type AccountDBType = z.infer<typeof accountSchemaZod>;
-const accountSchema: RxJsonSchema<AccountDBType> = {
+const schema: RxJsonSchema<AccountDBType> = {
   title: "account schema",
   description: "describes a account",
   version: 0,
@@ -53,5 +54,11 @@ const accountSchema: RxJsonSchema<AccountDBType> = {
   },
   required: ["id", "userId", "provider", "lastLogin"],
 } as const;
-export { accountSchema, accountSchemaZod };
+const collectionOptions: Omit<
+  RxDBCollectionConfig<AccountDBType, never>,
+  "rxCollection"
+> = {
+  startSync: true, // Automatically observe changes and sync with React state
+};
+export { schema, collectionOptions };
 export type { AccountDBType };
