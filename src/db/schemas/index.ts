@@ -1,4 +1,4 @@
-import { type RxJsonSchema } from "rxdb";
+import { type RxCollectionCreator } from "rxdb";
 import { type RxDBCollectionConfig } from "@tanstack/rxdb-db-collection";
 import * as user from "./user.schema";
 import * as account from "./account.schema";
@@ -9,8 +9,8 @@ import * as account from "./account.schema";
  * 1. Contains both 'schema' and 'collectionOptions' (Full Config)
  * 2. Or is just a raw 'RxJsonSchema' (Basic Config)
  */
-type CollectionDefinition<T extends object = never> = {
-  schema: RxJsonSchema<T>;
+type CollectionDefinition<T extends object = any> = {
+  collectionCreator: RxCollectionCreator<T>;
   collectionOption?: Omit<RxDBCollectionConfig<T, never>, "rxCollection">;
 };
 

@@ -10,10 +10,12 @@ import {
 } from "rxdb/plugins/core";
 import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
 import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
-import { wrappedValidateAjvStorage } from "rxdb/plugins/validate-ajv";
 import { allSchemas } from "./schemas";
-
+import { wrappedValidateZSchemaStorage } from "rxdb/plugins/validate-z-schema";
+import { RxDBMigrationSchemaPlugin } from "rxdb/plugins/migration-schema";
+// import { wrappedValidateIsMyJsonValidStorage } from "rxdb/plugins/validate-is-my-json-valid";
 // --- LAYER 1: INITIALIZATION & PLUGINS ---
+addRxPlugin(RxDBMigrationSchemaPlugin);
 if (import.meta.env.DEV) {
   addRxPlugin(RxDBDevModePlugin);
 }
@@ -22,9 +24,7 @@ if (import.meta.env.DEV) {
 type SchemaRegistry = typeof allSchemas;
 type SchemaKeys = keyof SchemaRegistry;
 
-type ExtractDocType<T> = T extends { schema: RxJsonSchema<infer D> }
-  ? D
-  : never;
+type ExtractDocType<T> = T extends { schema: RxJsonSchema<infer D> } ? D : any;
 
 export type AppDatabase = {
   [K in SchemaKeys]: Collection<ExtractDocType<SchemaRegistry[K]>, string>;
@@ -39,8 +39,9 @@ export let RdxDB: RxDatabase | null = null;
 export const db = {} as AppDatabase;
 
 const DB_NAME = _.kebabCase(import.meta.env.VITE_CLIENT_DB_NAME ?? "client-db");
-const STORAGE = wrappedValidateAjvStorage({ storage: getRxStorageDexie() });
-
+const STORAGE = wrappedValidateZSchemaStorage({
+  storage: getRxStorageDexie(),
+});
 /**
  * setupDatabase: Wraps Layer 2 and 4 logic into a single function.
  * This allows asynchronous initialization at the appropriate entry point.
@@ -65,12 +66,11 @@ export async function setupDatabase() {
         Object.entries(allSchemas).map(([name, config]) => [
           name,
           {
-            schema: config.schema,
+            ...config.collectionCreator,
           },
         ]),
       ) as never,
     );
-
     // 2. Create Reactive TanStack Layer
     (Object.keys(allSchemas) as SchemaKeys[]).forEach((name) => {
       const config = allSchemas[name];
@@ -95,7 +95,7 @@ export async function setupDatabase() {
     console.error("❌ DB Setup failed:", error);
     try {
       await removeRxDatabase(DB_NAME, STORAGE);
-      if (typeof window !== "undefined") window.location.reload();
+      // if (typeof window !== "undefined") window.location.reload();
     } catch (wipeError) {
       console.error("💀 Fatal wipe error:", wipeError);
     }

@@ -1,5 +1,5 @@
 import type { RxDBCollectionConfig } from "@tanstack/rxdb-db-collection";
-import type { RxJsonSchema } from "rxdb";
+import type { RxCollectionCreator, RxJsonSchema } from "rxdb";
 
 /**
  * LAYER 1: DATA MODEL DEFINITION
@@ -10,6 +10,7 @@ type UserDBType = {
   id: string;
   name: string;
   email: string;
+  test: string;
   createdAt: number;
 };
 
@@ -21,7 +22,7 @@ type UserDBType = {
 const schema: RxJsonSchema<UserDBType> = {
   title: "human schema",
   description: "describes a human being",
-  version: 0,
+  version: 1,
   keyCompression: false,
   primaryKey: "id",
   type: "object",
@@ -29,6 +30,9 @@ const schema: RxJsonSchema<UserDBType> = {
     id: {
       type: "string",
       maxLength: 40,
+    },
+    test: {
+      type: "string",
     },
     name: {
       type: "string",
@@ -55,7 +59,17 @@ const collectionOptions: Omit<
 > = {
   startSync: true, // Automatically observe changes and sync with React state
 };
-
+const collectionCreator: RxCollectionCreator<UserDBType> = {
+  schema: schema,
+  migrationStrategies: {
+    1: (oldDocumentData: any, collection: any) => {
+      return {
+        ...oldDocumentData,
+        test: "test",
+      };
+    },
+  },
+};
 // Exporting the schema and options as a cohesive unit for dynamic registration
-export { schema, collectionOptions };
+export { collectionOptions, collectionCreator };
 export type { UserDBType };
