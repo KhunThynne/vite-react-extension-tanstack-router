@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.4...v0.0.5) (2026-03-09)
+
+
+### Features
+
+* Introduce RxDB schemas for user and account models, and define ContentScriptActionType. ([42e8692](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/42e8692fd4266f2f3dde0b3b15d98f609d0ddd51))
+
 ### [0.0.4](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.3...v0.0.4) (2026-03-09)
 
 
