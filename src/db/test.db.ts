@@ -37,13 +37,13 @@ const testSchema: RxJsonSchema<TestDBType> = {
   required: ["id", "name", "email", "createdAt"],
 } as const;
 
-export const RdxDB = await createRxDatabase({
+export const rdxdb = await createRxDatabase({
   name: _.kebabCase("client-db"),
   storage: wrappedValidateAjvStorage({
     storage: getRxStorageDexie(),
   }),
 });
-await RdxDB.addCollections({
+await rdxdb.addCollections({
   test: {
     schema: testSchema,
   },
@@ -51,7 +51,7 @@ await RdxDB.addCollections({
 export type TestCollection = Collection<TestDBType, TestDBType['id']>;
 const testCollention: TestCollection = createCollection(
   rxdbCollectionOptions({
-    rxCollection: RdxDB["test"],
+    rxCollection: rdxdb["test"],
     startSync: true,
   }),
 );
