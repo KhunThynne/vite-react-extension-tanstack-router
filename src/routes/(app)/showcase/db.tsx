@@ -21,14 +21,8 @@ function RouteComponent() {
       name: "John",
       email: "[EMAIL_ADDRESS]",
       createdAt: Date.now(),
+      test: "",
     });
-
-    // userCollection.insert({
-    //   id: crypto.randomUUID(),
-    //   name: "John",
-    //   email: "[EMAIL_ADDRESS]",
-    //   createdAt: Date.now(),
-    // });
   };
   const handleDelete = (id: string) => {
     db.user.delete([id]);

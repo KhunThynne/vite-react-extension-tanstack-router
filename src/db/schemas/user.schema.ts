@@ -1,5 +1,6 @@
 import type { RxDBCollectionConfig } from "@tanstack/rxdb-db-collection";
 import type { RxCollectionCreator, RxJsonSchema } from "rxdb";
+import type { CollectionDefinition } from ".";
 
 /**
  * LAYER 1: DATA MODEL DEFINITION
@@ -53,23 +54,26 @@ const schema: RxJsonSchema<UserDBType> = {
  * We omit 'rxCollection' here because it will be injected during the
  * database initialization phase in the main DB entry point.
  */
-const collectionOptions: Omit<
-  RxDBCollectionConfig<UserDBType, never>,
-  "rxCollection"
-> = {
-  startSync: true, // Automatically observe changes and sync with React state
-};
-const collectionCreator: RxCollectionCreator<UserDBType> = {
-  schema: schema,
-  migrationStrategies: {
-    1: (oldDocumentData: any, collection: any) => {
-      return {
-        ...oldDocumentData,
-        test: "test",
-      };
+
+// Exporting the schema and options as a cohesive unit for dynamic registration
+const config = {
+  collectionAdd: {
+    schema: schema,
+    migrationStrategies: {
+      1: (oldDocumentData: any, collection: any) => {
+        return {
+          ...oldDocumentData,
+          test: "test",
+        };
+      },
     },
   },
-};
-// Exporting the schema and options as a cohesive unit for dynamic registration
-export { collectionOptions, collectionCreator };
+  replicateRxCollection: { live: true },
+  collectionOptions: {
+    startSync: true,
+  },
+} satisfies CollectionDefinition<UserDBType>;
+
+export const { collectionAdd, replicateRxCollection, collectionOptions } =
+  config;
 export type { UserDBType };

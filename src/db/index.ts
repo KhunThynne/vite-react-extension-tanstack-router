@@ -13,6 +13,7 @@ import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
 import { allSchemas } from "./schemas";
 import { wrappedValidateZSchemaStorage } from "rxdb/plugins/validate-z-schema";
 import { RxDBMigrationSchemaPlugin } from "rxdb/plugins/migration-schema";
+import { replicateRxCollection } from "rxdb/plugins/replication";
 // import { wrappedValidateIsMyJsonValidStorage } from "rxdb/plugins/validate-is-my-json-valid";
 // --- LAYER 1: INITIALIZATION & PLUGINS ---
 addRxPlugin(RxDBMigrationSchemaPlugin);
@@ -24,7 +25,13 @@ if (import.meta.env.DEV) {
 type SchemaRegistry = typeof allSchemas;
 type SchemaKeys = keyof SchemaRegistry;
 
-type ExtractDocType<T> = T extends { schema: RxJsonSchema<infer D> } ? D : any;
+type ExtractDocType<T> = T extends {
+  collectionAdd: {
+    schema: RxJsonSchema<infer D>;
+  };
+}
+  ? D
+  : never;
 
 export type AppDatabase = {
   [K in SchemaKeys]: Collection<ExtractDocType<SchemaRegistry[K]>, string>;
@@ -66,7 +73,7 @@ export async function setupDatabase() {
         Object.entries(allSchemas).map(([name, config]) => [
           name,
           {
-            ...config.collectionCreator,
+            ...config.collectionAdd,
           },
         ]),
       ) as never,
@@ -75,10 +82,16 @@ export async function setupDatabase() {
     (Object.keys(allSchemas) as SchemaKeys[]).forEach((name) => {
       const config = allSchemas[name];
       const rxCol = RdxDB![name];
+      const version = config.collectionAdd.schema.version;
       if (!rxCol) return;
-
-      const options = (config as any).collectionOption ?? { startSync: true };
-
+      const options = config.collectionOptions ?? { startSync: true };
+      if ("replicateRxCollection" in config && config.replicateRxCollection) {
+        replicateRxCollection({
+          collection: rxCol,
+          ...config.replicateRxCollection,
+          replicationIdentifier: `${version}-sync-${name}`,
+        });
+      }
       // Populate the exported db object with TanStack collections
       db[name] = createCollection(
         rxdbCollectionOptions({
