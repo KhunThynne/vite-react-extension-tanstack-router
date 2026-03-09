@@ -16,7 +16,7 @@ export type CollectionDefinition<SchemaT extends object = never> = {
     "rxCollection"
   >;
   replicateRxCollection?: Omit<
-    ReplicationOptions<SchemaT, any>,
+    ReplicationOptions<SchemaT, never>,
     "collection" | "replicationIdentifier"
   >;
 };

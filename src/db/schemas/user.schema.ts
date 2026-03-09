@@ -1,5 +1,4 @@
-import type { RxDBCollectionConfig } from "@tanstack/rxdb-db-collection";
-import type { RxCollectionCreator, RxJsonSchema } from "rxdb";
+import type { RxJsonSchema } from "rxdb";
 import type { CollectionDefinition } from ".";
 
 /**
@@ -60,7 +59,7 @@ const config = {
   collectionAdd: {
     schema: schema,
     migrationStrategies: {
-      1: (oldDocumentData: any, collection: any) => {
+      1: (oldDocumentData) => {
         return {
           ...oldDocumentData,
           test: "test",
@@ -74,6 +73,5 @@ const config = {
   },
 } satisfies CollectionDefinition<UserDBType>;
 
-export const { collectionAdd, replicateRxCollection, collectionOptions } =
-  config;
+export const { collectionAdd, collectionOptions } = config;
 export type { UserDBType };

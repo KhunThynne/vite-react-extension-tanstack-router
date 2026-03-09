@@ -22,7 +22,7 @@ import type { RxJsonSchema } from "rxdb";
 import z from "zod";
 import type { CollectionDefinition } from ".";
 
-const accountSchemaZod = z.object({
+export const accountSchemaZod = z.object({
   id: z.string(),
   userId: z.string(),
   provider: z.string(),
@@ -65,6 +65,6 @@ const config = {
   },
 } satisfies CollectionDefinition<AccountDBType>;
 
-export const { collectionOptions, replicateRxCollection, collectionAdd } =
+export const { collectionOptions, collectionAdd } =
   config;
 export type { AccountDBType };
