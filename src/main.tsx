@@ -10,6 +10,7 @@ import {
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import Provider from "./provider";
 
 // Create a new router instance
 const router = createRouter({
@@ -26,6 +27,8 @@ declare module "@tanstack/react-router" {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 );

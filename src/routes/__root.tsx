@@ -3,7 +3,6 @@ import React from "react";
 import notFoundComponent from "@/shared/components/NotFoundComponent";
 import PendingComponent from "@/shared/components/PendingComponent";
 import { createDb } from "@/db";
-import Provider from "@/routes/-provider";
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -18,10 +17,10 @@ export const Route = createRootRoute({
     await createDb();
   },
   component: () => (
-    <Provider>
+    <React.Fragment>
       <Outlet />
       <TanStackRouterDevtools />
-    </Provider>
+    </React.Fragment>
   ),
   pendingComponent: PendingComponent,
   notFoundComponent,

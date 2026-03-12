@@ -1,11 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  Home,
-  LayoutDashboard,
-  FileText,
-  Component,
-  Database,
-} from "lucide-react";
+import { Home } from "lucide-react";
 
 import { cn } from "@/shared/components/ui/utils";
 import {
