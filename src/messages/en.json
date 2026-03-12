@@ -36,5 +36,14 @@
       "save_changes": "Save changes",
       "save_password": "Save password"
     }
+  },
+  "AppMain": {
+    "title": "Vite Extension",
+    "description": "Powered by Shadcn UI and Tailwind CSS",
+    "go_to_app": "Go to App",
+    "edit": "Edit",
+    "save_to_test_hmr": "and save to test HMR",
+    "learn_more": "Click on the Vite and React logos to learn more",
+    "back_to_main": "Back to main"
   }
 }

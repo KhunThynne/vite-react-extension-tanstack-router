@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
-export const SwitchLanguageButton = (
-  buttonProps: React.ComponentProps<typeof Button>,
-) => {
+import clsx from "clsx";
+export const SwitchLanguageButton = ({
+  className,
+  ...buttonProps
+}: React.ComponentProps<typeof Button>) => {
   const { i18n } = useTranslation();
   const language = i18n.language as "en" | "th";
   const changeLanguage = (lng: "en" | "th") => {
@@ -12,8 +14,9 @@ export const SwitchLanguageButton = (
   return (
     <Button
       {...buttonProps}
+      size="icon"
       onClick={() => changeLanguage(language === "th" ? "en" : "th")}
-      className="uppercase"
+      className={clsx("uppercase cursor-pointer", className)}
     >
       {language}
     </Button>

@@ -15,12 +15,22 @@ import { Link } from "@tanstack/react-router";
 import { SwitchThemeButton } from "./SwitchThemeButton";
 import { SwitchLanguageButton } from "./SwitchLanguageButton";
 import { Separator } from "./ui/separator";
+import clsx from "clsx";
+import { useLocation } from "@tanstack/react-router";
 
 export function AppMain() {
   const { t } = useTranslation();
+  const location = useLocation();
   return (
     <div className="flex items-center justify-center h-full ">
-      <Card className="w-full max-w-md shadow-lg">
+      <Card
+        className={clsx(
+          "w-full max-w-md ",
+          location.pathname !== "/"
+            ? " bg-transparent border-transparent shadow-none"
+            : "",
+        )}
+      >
         <CardHeader className="text-center">
           <div className="mx-auto">
             <img
@@ -29,37 +39,43 @@ export function AppMain() {
               alt="Extension logo"
             />
           </div>
-          <CardTitle className="text-2xl font-bold">Vite Extension</CardTitle>
-          <CardDescription>
-            Powered by Shadcn UI and Tailwind CSS
-          </CardDescription>
+          <CardTitle className="text-2xl font-bold">
+            {t("AppMain.title")}
+          </CardTitle>
+          <CardDescription>{t("AppMain.description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 text-center ">
           <div className="p-4 bg-secondary rounded-lg">
             <p className="text-lg font-medium">{t("Index.title")}</p>
           </div>
           <Separator />
-          <div className="grid  gap-2 ">
+          <div className="grid  gap-2">
             <div className="flex justify-center gap-2 ">
               <SwitchThemeButton />
               <SwitchLanguageButton />
             </div>
-
-            <Link to="/showcase" className="group ">
-              {(props) => (
-                <Button size="lg" disabled={props.isActive} className="w-full">
-                  Go to App
+            <Link to={location.pathname === "/" ? "/showcase" : "/"}>
+              {({ isActive }) => (
+                <Button
+                  size="lg"
+                  disabled={isActive}
+                  className="w-full cursor-pointer"
+                  variant={location.pathname === "/" ? "default" : "link"}
+                >
+                  {location.pathname === "/"
+                    ? t("AppMain.go_to_app")
+                    : t("AppMain.back_to_main")}
                 </Button>
               )}
             </Link>
           </div>
 
           <p className="text-sm text-muted-foreground">
-            Edit
+            {t("AppMain.edit")}{" "}
             <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-foreground">
               src/routes/index.tsx
             </code>
-            and save to test HMR
+            {t("AppMain.save_to_test_hmr")}
           </p>
         </CardContent>
         <CardFooter className="justify-center flex flex-col space-y-1 ">
@@ -87,7 +103,7 @@ export function AppMain() {
             </a>
           </div>
           <p className="text-xs text-muted-foreground">
-            Click on the Vite and React logos to learn more
+            {t("AppMain.learn_more")}
           </p>
         </CardFooter>
       </Card>

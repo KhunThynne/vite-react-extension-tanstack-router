@@ -18,42 +18,45 @@ import { useSidebarContext } from "@/shared/contexts/ProviderSidebar";
 import { SwitchThemeButton } from "@/shared/components/SwitchThemeButton";
 import { SwitchLanguageButton } from "@/shared/components/SwitchLanguageButton";
 import { Link, useLocation } from "@tanstack/react-router";
+import config from "../config";
+import { Button } from "./ui/button";
 const AppName = import.meta.env.VITE_APP_NAME;
 export function AppSidebar({ className }: { className?: string }) {
   const { t } = useTranslation();
   const { open } = useSidebarContext();
-  const navItems = [
-    { icon: LayoutDashboard, label: t("Sidebar.dashboard"), to: "/showcase" },
-    { icon: FileText, label: t("Sidebar.forms_showcase"), to: "/showcase/forms" },
-    { icon: Component, label: t("Sidebar.ui_showcase"), to: "/showcase/ui" },
-    { icon: Database, label: t("Sidebar.db_showcase"), to: "/showcase/db" },
-  ];
-
+  const navigation = config.navigation(t);
   const location = useLocation();
- 
+
   return (
     <aside
       className={clsx(
         `lg:block sticky top-0  z-20 transition-all duration-300 ease-in-out  overflow-hidden @container`,
-        ` border-r bg-muted/40  max-h-screen  flex-none sm:w-xs w-20`,
+        `   bg-sidebar max-h-screen  flex-none sm:w-xs w-20`,
         className,
         open ? "max-lg:max-w-sm" : "max-lg:max-w-0 ",
       )}
     >
       <div className="flex h-full flex-col border-r bg-card w-full">
-        <div className="flex h-14 items-center @max-3xs:justify-center border-b px-4 lg:h-[60px] lg:px-6 ">
-          <Link to="/" className="flex items-center gap-2 font-semibold">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Home className="size-5" />
-            </div>
-            <span className="@max-3xs:hidden">
+        <div className="flex h-15 items-center @max-3xs:justify-center border-b px-6  gap-4">
+          <div className="size-8 bg-primary rounded-lg place-content-center text-primary-foreground">
+            <Home className="size-5 m-auto " />
+          </div>
+          <Link
+            to="/"
+            className="flex items-center gap-2 font-semibold"
+            title={t("Sidebar.app_name")}
+          >
+            <Button
+              variant="link"
+              className="@max-3xs:hidden text-lg p-0 cursor-pointer"
+            >
               {AppName ?? t("Sidebar.app_name")}
-            </span>
+            </Button>
           </Link>
         </div>
-        <div className="flex-1 overflow-auto py-4">
+        <div className="flex-1 overflow-y-auto py-4 overflow-x-hidden">
           <nav className="grid gap-1 px-2 @max-3xs:place-content-center">
-            {navItems.map((item, index) => {
+            {navigation.map((item, index) => {
               const isActive = item.to === location.pathname;
               return (
                 <Link
@@ -73,12 +76,12 @@ export function AppSidebar({ className }: { className?: string }) {
             })}
           </nav>
         </div>
-        <div className="p-4  flex @max-3xs:flex-col items-center justify-end gap-2">
+        <div className="p-4  flex @max-3xs:flex-col items-center justify-end gap-2 ">
           <SwitchThemeButton />
           <SwitchLanguageButton />
         </div>
         <div className="border-t p-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 @max-3xs:justify-center">
             <Avatar>
               <AvatarImage src="/avatars/01.png" alt="@user" />
               <AvatarFallback>US</AvatarFallback>

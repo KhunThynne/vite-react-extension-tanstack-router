@@ -36,5 +36,14 @@
       "save_changes": "บันทึกการเปลี่ยนแปลง",
       "save_password": "บันทึกรหัสผ่าน"
     }
+  },
+  "AppMain": {
+    "title": "Vite Extension",
+    "description": "ทำงานด้วย Shadcn UI และ Tailwind CSS",
+    "go_to_app": "ไปที่แอป",
+    "edit": "แก้ไข",
+    "save_to_test_hmr": "และบันทึกเพื่อทดสอบ HMR",
+    "learn_more": "คลิกที่โลโก้ Vite และ React เพื่อเรียนรู้เพิ่มเติม",
+    "back_to_main": "ย้อนกลับไปหน้าหลัก"
   }
 }

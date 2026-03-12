@@ -9,15 +9,15 @@ export const Route = createFileRoute("/(app)")({
 
 function AppLayout() {
   return (
-    <div className="flex min-h-screen w-full bg-muted/40">
+    <div className="flex min-h-screen w-full">
       <AppSidebar className=" " />
       <div
         className={clsx(
-          "flex flex-col transition-all duration-300 ease-in-out grow  overflow-auto",
+          "flex flex-col transition-all duration-300 ease-in-out grow  ",
         )}
       >
-        <AppHeader />
-        <main className="flex-1 p-4 lg:p-6">
+        <AppHeader className="sticky top-0" />
+        <main className="flex-1 p-4 lg:p-6 ">
           <Outlet />
         </main>
       </div>
