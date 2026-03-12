@@ -42,11 +42,12 @@ function RouteComponent() {
           <div>{user.name}</div>
           <div>{user.email}</div>
           <Button
+            variant={"destructive"}
             onClick={() => {
               handleDelete(user.id);
             }}
           >
-            Delete{" "}
+            Delete
           </Button>
 
           <Button
@@ -61,3 +62,4 @@ function RouteComponent() {
     </div>
   );
 }
+

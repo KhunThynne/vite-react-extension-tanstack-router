@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
+
 import { Button } from "@/shared/components/ui/button";
 import { ContainerSection } from "@/shared/components/ContainerSection";
 import { useAppForm } from "@/shared/hooks/useAppForm";
@@ -64,12 +64,8 @@ function FormsShowcase() {
 
               <form.AppField
                 name="email"
-                validators={{
-                  onChange: z.string().email(),
-                }}
                 children={(field) => (
                   <field.Input
-                    type="email"
                     label="Email"
                     placeholder="john@example.com"
                   />
@@ -107,11 +103,6 @@ function FormsShowcase() {
                   children={(field) => (
                     <field.CheckBox label="Enable Notifications" />
                   )}
-                />
-
-                <form.AppField
-                  name="theme"
-                  children={(field) => <field.Switch label="Dark Mode" />}
                 />
               </div>
 

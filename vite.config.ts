@@ -13,6 +13,17 @@ export default defineConfig({
       "@@": resolve(__dirname, "src/shared"),
     },
   },
+  build: {
+    emptyOutDir: true,
+    cssCodeSplit: false,
+    // minify: "terser",
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: true,
+        assetFileNames: "assets/[name]-[hash].[ext]",
+      },
+    },
+  },
   plugins: [
     tanstackRouter({
       target: "react",
@@ -22,6 +33,7 @@ export default defineConfig({
     tailwindcss(),
     webExtension({
       manifest,
+      additionalInputs: ["index.html"],
     }),
     react({
       babel: {

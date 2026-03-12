@@ -1,6 +1,9 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import React, { Fragment } from "react";
+import React from "react";
 import notFoundComponent from "@/shared/components/NotFoundComponent";
+import PendingComponent from "@/shared/components/PendingComponent";
+import { createDb } from "@/db";
+import Provider from "@/routes/-provider";
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -11,14 +14,15 @@ const TanStackRouterDevtools = import.meta.env.PROD
     );
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    await createDb();
+  },
   component: () => (
-    <Fragment>
+    <Provider>
       <Outlet />
       <TanStackRouterDevtools />
-    </Fragment>
+    </Provider>
   ),
-  loader: () => {
-    return <>Loading</>;
-  },
+  pendingComponent: PendingComponent,
   notFoundComponent,
 });

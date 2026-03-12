@@ -1,12 +1,12 @@
 import { createRoot } from "react-dom/client";
 import cssText from "@/assets/global.css?inline";
 
-import { Overlay } from "./components/Overlay";
+// import { Overlay } from "./components/Overlay";
 import { useThemeBridge } from "@/shared/hooks/useThemeBridge";
 
 export default function Main({ container }: { container?: HTMLElement }) {
   useThemeBridge(container);
-  return <Overlay isVisible={true} />;
+  return null;
 }
 
 const HOST_ID = "HepPost-tiktok-host";

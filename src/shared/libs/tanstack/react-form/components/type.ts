@@ -1,4 +1,4 @@
-export interface FormPropsField {
+export interface FormXdPropsField {
   name: string;
   label?: string | React.ReactNode;
   description?: string;
@@ -8,6 +8,10 @@ export type LabelDescription = {
   label?: string | React.ReactNode;
   description?: string | React.ReactNode;
   htmlFor?: string;
+};
+export type ValidateProps = {
+  validate?: string | React.ReactNode;
+  hidden?: boolean;
 };
 
 type WithChildren<T = unknown> = T & {

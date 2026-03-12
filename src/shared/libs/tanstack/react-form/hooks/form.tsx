@@ -9,6 +9,9 @@ const FieldCheckBox = lazy(() => import("../components/FieldCheckBox"));
 const FieldSwitch = lazy(() => import("../components/FieldSwitch"));
 const FieldRadioGroup = lazy(() => import("../components/FieldRadioGroup"));
 const SubscribeButton = lazy(() => import("../components/ButtonSubscribe"));
+const FieldErrorMessage = lazy(
+  () => import("../components/shared/FieldErrorMessage"),
+);
 
 type BaseCreateFormOptions = Parameters<typeof rootCreateFormHook>[0];
 
@@ -19,6 +22,7 @@ const defaultFields = {
   CheckBox: FieldCheckBox,
   Switch: FieldSwitch,
   RadioGroup: FieldRadioGroup,
+  ErrorMessage: FieldErrorMessage,
 };
 
 export const createAppForm = <
@@ -43,7 +47,11 @@ export const createAppForm = <
     } as typeof defaultFields & TFieldComponents,
     formComponents: {
       SubscribeButton,
+      ErrorMessage: FieldErrorMessage,
       ...config?.formComponents,
-    } as { SubscribeButton: typeof SubscribeButton } & TFormComponents,
+    } as {
+      SubscribeButton: typeof SubscribeButton;
+      ErrorMessage: typeof FieldErrorMessage;
+    } & TFormComponents,
   });
 };

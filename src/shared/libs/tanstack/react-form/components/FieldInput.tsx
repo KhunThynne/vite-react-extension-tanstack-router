@@ -1,30 +1,32 @@
 import { useStore } from "@tanstack/react-form";
 import { useFieldContext } from "../hooks";
 import LabelAndDescriptionFieldForm from "./shared/LabelAndDescriptionFieldForm";
-import FieldFieldErrorI18nMessage from "./shared/FieldErrorI18nMessage";
+import FieldErrorMessage from "./shared/FieldErrorMessage";
 
-import type { LabelDescription, WithClassNames } from "./type";
+import type { LabelDescription, ValidateProps, WithClassNames } from "./type";
 
 import { Eye, EyeClosed, X } from "lucide-react";
 
-import { useId, useMemo, useState } from "react";
-import { Input } from "@/shared/components/ui/input";
+import { useMemo, useState } from "react";
+import { Input } from "@@/components/ui/input";
 import {
   InputGroup,
   InputGroupInput,
   InputGroupAddon,
-} from "@/shared/components/ui/input-group";
-import { cn } from "@/shared/components/ui/utils";
-import { Field } from "@/shared/components/ui/field";
+} from "@@/components/ui/input-group";
+import { cn } from "@@/components/ui/utils";
+import { Field } from "@@/components/ui/field";
 
 type FieldInputProps = LabelDescription &
   React.ComponentProps<typeof Input> & {
+    validate?: ValidateProps;
     clear?: boolean;
     groupe?: React.ComponentProps<typeof InputGroup> | true;
   } & WithClassNames<"label" | "description" | "input" | "field" | "validate">;
 
 export default function FieldInput({
   label,
+  validate,
   description,
   classNames,
   className,
@@ -36,7 +38,6 @@ export default function FieldInput({
 }: FieldInputProps) {
   const field = useFieldContext<string>();
   const errors = useStore(field.store, (state) => state.meta.errors);
-  const id = useId();
   const [showPassword, setShowPassword] = useState(type);
   const showPasswordIcon = useMemo(
     () => (showPassword === "password" ? true : false),
@@ -53,7 +54,7 @@ export default function FieldInput({
         label={label}
         required={input.required}
         description={description}
-        htmlFor={id}
+        htmlFor={field.name}
         classNames={{
           label: cn(`order-1`, classNames?.label),
           description: cn(`order-3`, classNames?.description),
@@ -61,13 +62,13 @@ export default function FieldInput({
       >
         {groupe || type === "search" || type === "password" || clear ? (
           <InputGroup
-            id={id}
             className={cn(`order-2`, grupeProp?.className)}
             {...grupeProp}
           >
             <InputGroupInput
               {...input}
-              id={id}
+              name={field.name}
+              id={field.name}
               required={false}
               value={field.state.value}
               className={cn(classNames?.input)}
@@ -92,7 +93,6 @@ export default function FieldInput({
             )}
             {type === "password" && (
               <InputGroupAddon
-                id={id}
                 className="cursor-pointer"
                 align={"inline-end"}
                 onClick={() =>
@@ -114,7 +114,8 @@ export default function FieldInput({
           <>
             <Input
               {...input}
-              id={id}
+              name={field.name}
+              id={field.name}
               required={false}
               value={field.state.value}
               className={cn(`order-2`, classNames?.input)}
@@ -127,7 +128,8 @@ export default function FieldInput({
         )}
       </LabelAndDescriptionFieldForm>
 
-      <FieldFieldErrorI18nMessage
+      <FieldErrorMessage
+        {...validate}
         className={cn(`order-4`, classNames?.validate)}
       />
     </Field>

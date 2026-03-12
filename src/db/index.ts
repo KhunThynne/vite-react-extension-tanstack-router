@@ -8,18 +8,15 @@ import {
   type RxJsonSchema,
   type RxDatabase,
 } from "rxdb/plugins/core";
-import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
 import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
 import { allSchemas } from "./schemas";
 import { wrappedValidateZSchemaStorage } from "rxdb/plugins/validate-z-schema";
 import { RxDBMigrationSchemaPlugin } from "rxdb/plugins/migration-schema";
 import { replicateRxCollection } from "rxdb/plugins/replication";
+import { RxDBAttachmentsPlugin } from "rxdb/plugins/attachments";
 // import { wrappedValidateIsMyJsonValidStorage } from "rxdb/plugins/validate-is-my-json-valid";
 // --- LAYER 1: INITIALIZATION & PLUGINS ---
-addRxPlugin(RxDBMigrationSchemaPlugin);
-if (import.meta.env.DEV) {
-  addRxPlugin(RxDBDevModePlugin);
-}
+
 
 // --- LAYER 3: TYPE ORCHESTRATION ---
 type SchemaRegistry = typeof allSchemas;
@@ -53,16 +50,22 @@ const STORAGE = wrappedValidateZSchemaStorage({
  * setupDatabase: Wraps Layer 2 and 4 logic into a single function.
  * This allows asynchronous initialization at the appropriate entry point.
  */
-export async function setupDatabase() {
+export async function createDb() {
   // Singleton Check: If already initialized, return existing db immediately
   if (rdxdb && Object.keys(db).length > 0) return db;
+  addRxPlugin(RxDBAttachmentsPlugin);
+  addRxPlugin(RxDBMigrationSchemaPlugin);
+  if (!import.meta.env.PROD) {
+    await import("rxdb/plugins/dev-mode").then((module) =>
+      addRxPlugin(module.RxDBDevModePlugin),
+    );
+  }
 
   try {
     // --- LAYER 2: DATABASE INSTANCE ---
     rdxdb = await createRxDatabase({
       name: DB_NAME,
       storage: STORAGE,
-      ignoreDuplicate: true,
     });
 
     // --- LAYER 4: COLLECTION REGISTRATION ---
