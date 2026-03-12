@@ -8,6 +8,9 @@
   },
   "Sidebar": {
     "dashboard": "แดชบอร์ด",
+    "forms_showcase": "ฟอร์มโชว์เคส",
+    "ui_showcase": "UI โชว์เคส",
+    "db_showcase": "DB โชว์เคส",
     "settings": "การตั้งค่า",
     "app_name": "React Vite"
   },

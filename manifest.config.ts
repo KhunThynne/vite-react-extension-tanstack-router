@@ -26,6 +26,9 @@ export default function generateManifest(): chrome.runtime.ManifestV3 {
       service_worker: "src/extension-core/background/index.ts",
       type: "module",
     },
+    side_panel: {
+      default_path: "index.html",
+    },
 
     content_scripts: [
       {

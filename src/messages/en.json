@@ -8,6 +8,9 @@
   },
   "Sidebar": {
     "dashboard": "Dashboard",
+    "forms_showcase": "Forms Showcase",
+    "ui_showcase": "UI Showcase",
+    "db_showcase": "DB Showcase",
     "settings": "Settings",
     "app_name": "React Vite"
   },

@@ -5,7 +5,7 @@ import "./shared/libs/i18n";
 import {
   RouterProvider,
   createRouter,
-  createBrowserHistory,
+  createMemoryHistory,
 } from "@tanstack/react-router";
 
 // Import the generated route tree
@@ -14,7 +14,7 @@ import { routeTree } from "./routeTree.gen";
 // Create a new router instance
 const router = createRouter({
   routeTree,
-  history: createBrowserHistory(),
+  history: createMemoryHistory(),
 });
 
 // Register the router instance for type safety

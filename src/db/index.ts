@@ -36,8 +36,8 @@ export type AppDatabase = {
 
 // --- LAYER 2 & 4: ASYNC SETUP WRAPPER ---
 
-// 1. Export rdxdb as a let variable to avoid Top-Level Await (TLA) errors in IIFE formats
-export let rdxdb: RxDatabase | null = null;
+// 1. Export rxdb as a let variable to avoid Top-Level Await (TLA) errors in IIFE formats
+export let rxdb: RxDatabase | null = null;
 
 // 2. Export db as a constant empty object to be populated later; maintains AppDatabase type
 export const db = {} as AppDatabase;
@@ -52,7 +52,7 @@ const STORAGE = wrappedValidateZSchemaStorage({
  */
 export async function createDb() {
   // Singleton Check: If already initialized, return existing db immediately
-  if (rdxdb && Object.keys(db).length > 0) return db;
+  if (rxdb && Object.keys(db).length > 0) return db;
   addRxPlugin(RxDBAttachmentsPlugin);
   addRxPlugin(RxDBMigrationSchemaPlugin);
   if (!import.meta.env.PROD) {
@@ -63,7 +63,7 @@ export async function createDb() {
 
   try {
     // --- LAYER 2: DATABASE INSTANCE ---
-    rdxdb = await createRxDatabase({
+    rxdb = await createRxDatabase({
       name: DB_NAME,
       storage: STORAGE,
     });
@@ -71,7 +71,7 @@ export async function createDb() {
     // --- LAYER 4: COLLECTION REGISTRATION ---
 
     // 1. Register Physical Collections to RxDB
-    await rdxdb.addCollections(
+    await rxdb.addCollections(
       Object.fromEntries(
         Object.entries(allSchemas).map(([name, config]) => [
           name,
@@ -84,7 +84,7 @@ export async function createDb() {
     // 2. Create Reactive TanStack Layer
     (Object.keys(allSchemas) as SchemaKeys[]).forEach((name) => {
       const config = allSchemas[name];
-      const rxCol = rdxdb![name];
+      const rxCol = rxdb![name];
       const version = config.collectionAdd.schema.version;
       if (!rxCol) return;
       const options = config.collectionOptions ?? { startSync: true };

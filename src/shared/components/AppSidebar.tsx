@@ -24,9 +24,9 @@ export function AppSidebar({ className }: { className?: string }) {
   const { open } = useSidebarContext();
   const navItems = [
     { icon: LayoutDashboard, label: t("Sidebar.dashboard"), to: "/showcase" },
-    { icon: FileText, label: "Forms Showcase", to: "/showcase/forms" },
-    { icon: Component, label: "UI Showcase", to: "/showcase/ui" },
-    { icon: Database, label: "DB Showcase", to: "/showcase/db" },
+    { icon: FileText, label: t("Sidebar.forms_showcase"), to: "/showcase/forms" },
+    { icon: Component, label: t("Sidebar.ui_showcase"), to: "/showcase/ui" },
+    { icon: Database, label: t("Sidebar.db_showcase"), to: "/showcase/db" },
   ];
 
   const location = useLocation();
