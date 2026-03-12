@@ -1,7 +1,7 @@
 import db, { setupDatabase } from "@/db";
 import { chromeService } from "@/shared/services/chrome";
 setupDatabase().catch((err) => console.error("Initialization error", err));
-chromeService.runtime.onInstalled.addListener(() => {
+chromeService?.runtime?.onInstalled?.addListener(() => {
   chrome.sidePanel
     .setPanelBehavior({ openPanelOnActionClick: true })
     .catch((error) => console.error(error));

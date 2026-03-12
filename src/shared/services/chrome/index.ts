@@ -9,6 +9,7 @@ export const chromeService = {
   },
   runtime: {
     ...(isExtension ? chrome.runtime : {}),
+
     sendMessage: sendMessage,
     onMessage: {
       ...(isExtension ? chrome.runtime.onMessage : {}),
