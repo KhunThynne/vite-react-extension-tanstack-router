@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.5...v0.0.6) (2026-03-12)
+
+
+### Features
+
+* Add comprehensive documentation for the extension's type-safe messaging system, including defining actions, adding listeners, and sending messages. ([c69a6c7](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/c69a6c7f4e372ead4acaa79db80dc3dbcec03b2e))
+* Initialize browser extension project with core UI, routing, i18n, and RxDB integration. ([6afba1a](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/6afba1a7a3defe6a7ea40b17c52a351d16f7237e))
+* Scaffold Vite Chrome extension project with TanStack Router and RxDB, including core extension scripts and assets. ([4377340](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/43773408fe09966ad14b54a5b1ca8d0429d4edeb))
+
 ### [0.0.5](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.4...v0.0.5) (2026-03-09)
 
 
