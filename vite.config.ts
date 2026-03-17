@@ -1,10 +1,12 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import tailwindcss from "@tailwindcss/vite";
 import tanstackRouter from "@tanstack/router-plugin/vite";
 import webExtension from "vite-plugin-web-extension";
 import manifest from "./manifest.config";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
+
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
@@ -35,10 +37,9 @@ export default defineConfig({
       manifest,
       additionalInputs: ["index.html"],
     }),
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler"]],
-      },
+    react(),
+    babel({
+      presets: [reactCompilerPreset()],
     }),
   ],
 });

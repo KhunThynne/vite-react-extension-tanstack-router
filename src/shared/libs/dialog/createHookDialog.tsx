@@ -1,8 +1,10 @@
-import { useDialogDispatcher } from "./DialogProvider";
+"use client";
+
 import React, { useId } from "react";
 
-import { DialogInstance } from "./DialogInstance";
+import { DialogInstance } from "./contexts/DialogInstance";
 import type { DialogInstanceProps, DialogOptions } from "./index.type";
+import useDialogDispatcher from "./hooks/useDialogDispatcher";
 const DialogState = {
   OPEN: "open",
   CLOSE: "close",
@@ -78,23 +80,12 @@ export const createHookDialog = (initialProps: DialogInstanceProps) => {
           },
         };
 
-        return (
-          <DialogInstance
-            options={finalOptions}
-            refDialog={refDialog}
-            refContent={contentRef}
-            {...props}
-          />
-        );
+        return <DialogInstance options={finalOptions} refDialog={refDialog} refContent={contentRef} {...props} />;
       },
       [closeDialog],
     );
     const openDialog = React.useCallback(
-      (
-        arg?:
-          | React.MouseEvent<HTMLButtonElement>
-          | Partial<DialogInstanceProps>,
-      ) => {
+      (arg?: React.MouseEvent<HTMLButtonElement> | Partial<DialogInstanceProps>) => {
         arg && "currentTarget" in arg
           ? add(id, Dialog({ ...props }))
           : add(id, Dialog({ ...props, ...(arg as DialogInstanceProps) }));
@@ -104,8 +95,7 @@ export const createHookDialog = (initialProps: DialogInstanceProps) => {
 
     React.useLayoutEffect(() => {
       if (strictModeHandledRef.current) return;
-      const shouldOpen =
-        props?.options?.dialog?.open || props?.options?.dialog?.defaultOpen;
+      const shouldOpen = props?.options?.dialog?.open || props?.options?.dialog?.defaultOpen;
       if (shouldOpen) {
         strictModeHandledRef.current = true;
         add(id, Dialog({ ...props }));
