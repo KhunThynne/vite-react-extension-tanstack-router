@@ -8,7 +8,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from "@components/ui/dialog";
+} from "@@/components/ui/dialog";
 import type { DialogContextInstanceType, DialogInstanceProps } from "../index.type";
 import { createContext, useCallback, useImperativeHandle, useLayoutEffect, useState } from "react";
 import clsx from "clsx";

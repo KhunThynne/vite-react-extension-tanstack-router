@@ -1,7 +1,7 @@
-import { DialogInstanceProvider } from "./DialogInstance";
-import { DialogContext } from "./DialogContext";
+import { DialogInstanceProvider } from "./contexts/DialogInstance";
+import { DialogContext } from "./contexts/DialogContext";
 import { useState } from "react";
-import type { DialogEntry } from "../index.type";
+import type { DialogEntry } from "./index.type";
 
 export function DialogProvider({ children }: { children: React.ReactNode }) {
   const [dialogs, setDialogs] = useState<DialogEntry[]>([]);

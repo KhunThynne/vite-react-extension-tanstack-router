@@ -1,6 +1,10 @@
-# Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### Features
+
+* Add `AppMain` component for the main application UI and update README with the extension logo. ([15ce4ec](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/15ce4ec7039bd6e051b1955aaa681544a781a215))
+* Implement initial application structure including core layout, navigation, internationalization, theme switching, and a database showcase. ([989c83c](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/989c83c134aac6c748a7083f61e54fda569901b9))
+* Initialize core application structure with TanStack Router, root route, and a responsive application sidebar. ([6acdbe8](https://github.com/KhunThynne/vite-react-extension-tanstack-router/commit/6acdbe89abed98a527be5d381d81cef8bd063817))
 
 ### [0.0.6](https://github.com/KhunThynne/vite-react-extension-tanstack-router/compare/v0.0.5...v0.0.6) (2026-03-12)
 
