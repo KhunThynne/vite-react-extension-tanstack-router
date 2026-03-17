@@ -2,7 +2,7 @@
   <img src="./public/icons/icon-512.png" alt="Extension Logo" width="128" />
 </p>
 
-# ⚡ Vite + React Chrome Extension Template
+# ⚡ Vite + React Chrome Extension Boilerplate
 
 A modern, highly-opinionated template for building Chrome Extensions (Manifest V3) using React. It provides advanced tooling, file-based routing, real-time local databases, and a strictly typed messaging system to speed up your extension development workflow.
 
